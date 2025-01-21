@@ -3,6 +3,7 @@ package com.tekarch.TafUserService.Service;
 import com.tekarch.TafUserService.Models.UserDTO;
 import com.tekarch.TafUserService.Service.Interface.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -14,8 +15,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     private RestTemplate restTemplate;
-    private final String DATASOURCE_URL = "http://localhost:8080/users"; // URL to TafDatastoreService
-
+   // private final String DATASOURCE_URL = "http://localhost:8080/users"; // URL to TafDatastoreService
+   @Value("${datasource.url}")
+   private String DATASOURCE_URL;
     @Override
     // This method creates a new user by sending a POST request to the TafDatastoreService with the provided userDTO.
     public UserDTO createUser(UserDTO userDTO) {
